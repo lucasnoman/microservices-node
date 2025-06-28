@@ -9,3 +9,5 @@ In the Dockerfile there isn't volume. When deploying an app that can scale horiz
 Drizzle Commands:
 `npx drizzle-kit generate`: **gera** as migrations
 `npx drizzle-kit migrate`: **executa** as migrations
+
+**Contracts** are points of truth between all services of what data are trafficking between microservices.
