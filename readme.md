@@ -1,0 +1,3 @@
+Everytime we create an app that'll have Horizontal Scaling or Blue Green Deployment, the health check route (`/health`) is used to check if the app is running. If the app is on air and responding in timely manner.
+
+Blue Green Deployment: is a software release strategy that minimizes downtime and risk by maintaining two identical production environments: a "blue" environment with the current live application and a "green" environment with the new version. During deployment, traffic is shifted from the blue environment to the green environment after the new version is tested, allowing for quick rollback if issues arise.
