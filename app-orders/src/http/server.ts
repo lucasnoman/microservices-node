@@ -2,6 +2,7 @@ import '@opentelemetry/auto-instrumentations-node/register'
 
 import { randomUUID } from 'node:crypto'
 import { fastifyCors } from '@fastify/cors'
+import { trace } from '@opentelemetry/api'
 import { fastify } from 'fastify'
 import {
   serializerCompiler,
@@ -45,6 +46,9 @@ app.post(
       customerId: '25f97ed7-d6b7-4220-ad2b-051e58b0546a',
       amount,
     })
+
+    // Add any data the dev need to debug the traces
+    trace.getActiveSpan()?.setAttribute('order_id', orderId)
 
     dispatchOrderCreated({
       orderId,
