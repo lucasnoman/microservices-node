@@ -11,3 +11,5 @@ Drizzle Commands:
 `npx drizzle-kit migrate`: **executa** as migrations
 
 **Contracts** are points of truth between all services of what data are trafficking between microservices.
+
+**RabbitMQ:** is a distributed message broker system. It uses Publish/Subscriber pattern, where an app publishes a message into RabbitMQ, which stores it, than any application who should be able to read this messages is registered as Subscriber and fetch all the messages on the queue.
