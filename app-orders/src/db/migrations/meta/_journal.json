@@ -8,6 +8,13 @@
       "when": 1751119154009,
       "tag": "0000_low_speed_demon",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1751123897804,
+      "tag": "0001_rich_meggan",
+      "breakpoints": true
     }
   ]
 }
