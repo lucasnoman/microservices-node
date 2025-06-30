@@ -41,6 +41,8 @@ The service will be available at `http://localhost:3334`.
 - **Drizzle ORM:** A TypeScript ORM for SQL databases.
 - **Jaeger:** An open-source, end-to-end distributed tracing system.
 - **Kong:** An open-source API gateway and microservices management layer.
+- **Pulumi:** An open-source infrastructure as code tool for provisioning cloud resources.
+- **AWS (Amazon Web Services):** A cloud computing platform providing infrastructure and services.
 
 ## Concepts
 
@@ -90,3 +92,11 @@ In this setup, Kong is configured (see `docker/kong/config.yaml`) to route reque
 
 **Jaeger**: is an open-source, end-to-end distributed tracing system designed for monitoring and troubleshooting complex, distributed systems like microservices. It helps developers understand how requests flow through various services, identify performance bottlenecks, and troubleshoot issues across interconnected components.
 In summary, it reports how long any little thing is taking in each requisition.
+
+### Pulumi & AWS
+
+**Pulumi** is an open-source infrastructure as code (IaC) tool that allows you to define, deploy, and manage cloud resources using familiar programming languages like TypeScript. Instead of manually creating resources in the cloud provider's console, you write code that describes the desired infrastructure, and Pulumi takes care of provisioning and updating those resources.
+
+**AWS (Amazon Web Services)** is a widely-used cloud computing platform that offers a variety of infrastructure and platform services, such as virtual machines, databases, storage, and networking.
+
+In this project, the `infra` directory contains code that uses Pulumi to provision and manage resources on AWS. This approach makes it easy to automate infrastructure setup, ensure consistency across environments, and version control your infrastructure alongside your application code.
