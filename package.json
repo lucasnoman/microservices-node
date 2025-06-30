@@ -15,8 +15,5 @@
     "@opentelemetry/auto-instrumentations-node": "^0.60.1",
     "@opentelemetry/sdk-node": "^0.202.0",
     "@opentelemetry/sdk-trace-node": "^2.0.1"
-  },
-  "dependencies": {
-    "@opentelemetry/api": "^1.9.0"
   }
 }
