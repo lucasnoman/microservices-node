@@ -11,9 +11,6 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "@biomejs/biome": "2.0.6",
-    "@opentelemetry/auto-instrumentations-node": "^0.60.1",
-    "@opentelemetry/sdk-node": "^0.202.0",
-    "@opentelemetry/sdk-trace-node": "^2.0.1"
+    "@biomejs/biome": "2.0.6"
   }
 }
