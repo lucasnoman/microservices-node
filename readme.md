@@ -1,6 +1,6 @@
 # Microservices Project
 
-This project is a simple demonstration of a microservices architecture using Node.js, RabbitMQ, and Docker. It consists of two microservices: `app-orders` and `app-invoices`.
+This project is a simple demonstration of a microservices architecture using Node.js, RabbitMQ, Docker, and Kong. It consists of two microservices: `app-orders` and `app-invoices`.
 
 ## Microservices
 
@@ -34,12 +34,13 @@ The service will be available at `http://localhost:3334`.
 
 ## Technologies Used
 
-*   **Node.js:** A JavaScript runtime built on Chrome's V8 JavaScript engine.
-*   **Fastify:** A fast and low overhead web framework for Node.js.
-*   **RabbitMQ:** A popular open-source message broker.
-*   **Docker:** A platform for developing, shipping, and running applications in containers.
-*   **Drizzle ORM:** A TypeScript ORM for SQL databases.
-*   **Jaeger:** An open-source, end-to-end distributed tracing system.
+- **Node.js:** A JavaScript runtime built on Chrome's V8 JavaScript engine.
+- **Fastify:** A fast and low overhead web framework for Node.js.
+- **RabbitMQ:** A popular open-source message broker.
+- **Docker:** A platform for developing, shipping, and running applications in containers.
+- **Drizzle ORM:** A TypeScript ORM for SQL databases.
+- **Jaeger:** An open-source, end-to-end distributed tracing system.
+- **Kong:** An open-source API gateway and microservices management layer.
 
 ## Concepts
 
@@ -71,7 +72,19 @@ Drizzle is a TypeScript ORM for SQL databases.
 
 ### RabbitMQ
 
-**RabbitMQ:** is a distributed message broker system. It uses Publish/Subscriber pattern, where an app publishes a message into RabbitMQ, which stores it, than any application who should be able to read this messages is registered as Subscriber and fetch all the messages on the queue.
+**RabbitMQ:** is a distributed message broker system. It uses the Publish/Subscribe pattern, where an app publishes a message into RabbitMQ, which stores it, then any application that should be able to read these messages is registered as a Subscriber and fetches all the messages on the queue.
+
+### Kong API Gateway
+
+**Kong** is an open-source API gateway that acts as a single entry point for all client requests to your microservices. It provides features such as routing, load balancing, authentication, rate limiting, and more. In this project, Kong is used to centralize and manage access to the `app-orders` and `app-invoices` services.
+
+**Why use Kong here?**
+
+- **Centralized Routing:** Kong receives all incoming API requests and forwards them to the correct microservice based on the request path (e.g., `/orders` or `/invoices`).
+- **Security and Control:** By routing all traffic through Kong, you can easily add security features (like authentication or CORS) and monitor traffic in one place.
+- **Scalability:** Kong makes it easier to scale your services and manage changes, since clients only need to know the gateway address, not the address of each service.
+
+In this setup, Kong is configured (see `docker/kong/config.yaml`) to route requests to the appropriate service running on your machine. For example, requests to `/orders` are forwarded to the `app-orders` service, and requests to `/invoices` are forwarded to the `app-invoices` service. Kong also applies a CORS plugin to allow cross-origin requests, making it easier to interact with the APIs from different clients.
 
 ### Jaeger
 
