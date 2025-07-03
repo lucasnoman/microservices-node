@@ -1,4 +1,22 @@
-# O que acontece aqui
+# Serviço de Orders
 
-O serviço de "orders" é dedicado a registrar os pedidos feitos pelo usuários. Ele tem uma conexão com o "invoices", pois cada "order" tem que gerar uma "invoice" (fatura). Dito isso, sua comunicação ocorre atualmente por PUB/SUB usando o RabbitMQ.
-Quando um usuário faz um pedido, os dados desse pedido são salvos em banco usando o **Drizzle** e em seguida enviados para o **RabbitMQ** a partir do código dentro de `app-orders/src/broker/messages/order-created.ts`, que usa a `amqplib` para enviar uma mensagem para a fila ("sendToQueue"). Ao enviar a mensagem para a fila, o próprio RabbitMQ o faz com **idempotência**, ou seja, só o faz se a mensagem já não estiver lá, evitando duplicidade de dados.
+O serviço de "orders" é responsável por registrar pedidos realizados pelos usuários e iniciar o fluxo de geração de faturas (invoices) de forma assíncrona e desacoplada.
+
+## Como funciona a comunicação
+
+- Ao receber um novo pedido, o serviço salva os dados no banco de dados utilizando o **Drizzle**.
+- Em seguida, publica uma mensagem no RabbitMQ, utilizando o canal `orders`, através do código em `app-orders/src/broker/messages/order-created.ts`.
+- O RabbitMQ garante a entrega idempotente das mensagens, evitando duplicidade de dados.
+
+## Vantagens
+
+- **Desacoplamento:** O serviço de orders não precisa conhecer detalhes do serviço de invoices.
+- **Escalabilidade:** Permite processar grandes volumes de pedidos e faturas de forma independente.
+- **Idempotência:** O RabbitMQ evita o processamento duplicado de mensagens.
+
+## Fluxo resumido
+
+1. O usuário faz um pedido.
+2. O serviço de "orders" salva o pedido no banco de dados.
+3. Publica uma mensagem na fila do RabbitMQ (canal `orders`).
+4. O serviço de "invoices" consome a mensagem e gera a fatura correspondente.
